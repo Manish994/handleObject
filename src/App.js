@@ -1,6 +1,6 @@
 import "./App.css";
-import NormalObject from "./components/normalObject";
-import AdvancedObject from "./components/advancedObject";
+import NormalObject from "./handleObject/components/normalObject";
+import AdvancedObject from "./handleObject/components/advancedObject";
 
 function App() {
   return (
