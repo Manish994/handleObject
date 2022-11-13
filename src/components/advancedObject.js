@@ -4,10 +4,17 @@ import { payload, payloadKeysMap } from "../data";
 const AdvancedObject = () => {
   const [initialData, setInitialData] = useState([]);
   const [showTable, setShowTable] = useState(false);
+  let arr = [];
+
   useEffect(() => {
     setInitialData((initialData) => ({ ...initialData, payload }));
     isEmpty(payload);
-    renameKeys();
+
+    //payloadkeysmaps contain key/vlaue pair of old/new object keys
+    //payload is the object to be changed
+
+    renameKeys(payloadKeysMap, payload.data);
+    console.log(arr);
   }, []);
 
   function isEmpty(payload) {
@@ -15,6 +22,21 @@ const AdvancedObject = () => {
       setShowTable((showTable) => true);
     }
     return false;
+  }
+
+  function renameKeys(payloadKeysMap, payload) {
+    return payload.forEach((item) => {
+      let renamedObject = Object.keys(item).reduce((acc, key) => {
+        const renObject = {
+          [payloadKeysMap[key] || [key]]: item[key],
+        };
+        return {
+          ...acc,
+          ...renObject,
+        };
+      }, {});
+      arr = arr.concat(renamedObject);
+    });
   }
   return (
     <div style={{ margin: "40px" }}>
